@@ -32,12 +32,27 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     background: var(--color-white);
+    width: 100%;
+    max-width: 100vw;
+}
+
+html {
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 .container {
     max-width: var(--container-max-width);
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
 }
 
 /* Header */
@@ -926,11 +941,22 @@ section {
 @media (max-width: 991.98px) {
     .streaming {
         padding: 50px 0;
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .streaming .row {
         display: flex;
         flex-direction: column;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .streaming .col-lg-6 {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
     }
     
     .streaming .col-lg-6:first-child {
@@ -944,10 +970,19 @@ section {
     .streaming-image {
         height: 350px;
         margin-bottom: 1.5rem;
+        width: 100%;
+        max-width: 100%;
     }
     
     .streaming-content {
         padding: 1rem 0;
+        width: 100%;
+    }
+    
+    .streaming-img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
     }
 }
 
@@ -1144,11 +1179,22 @@ section {
     .jogos {
         padding: 50px 0;
         background: linear-gradient(180deg, #0B1120 0%, #0d34ae 50%, #0B1120 100%);
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .jogos .row {
         display: flex;
         flex-direction: column;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .jogos .col-lg-6 {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
     }
     
     .jogos .col-lg-6:first-child {
@@ -1162,10 +1208,19 @@ section {
     .jogos-image {
         height: 350px;
         margin-bottom: 1.5rem;
+        width: 100%;
+        max-width: 100%;
     }
     
     .jogos-content {
         padding: 1rem 0;
+        width: 100%;
+    }
+    
+    .jogos-img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
     }
 }
 
@@ -1302,11 +1357,22 @@ section {
 @media (max-width: 991.98px) {
     .empresas {
         padding: 50px 0;
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .empresas .row {
         display: flex;
         flex-direction: column;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .empresas .col-lg-6 {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
     }
     
     .empresas .col-lg-6:first-child {
@@ -1320,10 +1386,19 @@ section {
     .empresas-image {
         height: 350px;
         margin-bottom: 1.5rem;
+        width: 100%;
+        max-width: 100%;
     }
     
     .empresas-content {
         padding: 1rem 0;
+        width: 100%;
+    }
+    
+    .empresas-img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
     }
 }
 
@@ -1531,6 +1606,12 @@ section {
 
 /* Responsive - Bootstrap já cuida da maioria, mas mantemos ajustes customizados */
 @media (max-width: 968px) {
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+    }
+    
     .hero-title {
         font-size: 2.5rem;
     }
@@ -1544,9 +1625,28 @@ section {
         justify-content: center;
         flex-wrap: wrap;
     }
+    
+    .container {
+        padding: 0 15px;
+    }
 }
 
 @media (max-width: 640px) {
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+    }
+    
+    * {
+        max-width: 100%;
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
     .hero-title {
         font-size: 2rem;
     }
@@ -1565,6 +1665,20 @@ section {
 
     .btn {
         width: 100%;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    [class*="col-"] {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }
 
