@@ -1,13 +1,4 @@
-// Menu Mobile Toggle
-const menuToggle = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.nav');
-
-if (menuToggle) {
-    menuToggle.addEventListener('click', () => {
-        nav.classList.toggle('active');
-        menuToggle.classList.toggle('active');
-    });
-}
+// Menu Mobile agora é gerenciado pelo Bootstrap automaticamente
 
 // Smooth Scroll para links de navegação
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -53,25 +44,98 @@ if (contatoForm) {
     });
 }
 
-// Animações ao scroll
+// Animações ao scroll com Intersection Observer
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -100px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
+const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('animate');
+            // Não observar novamente após animar (melhor performance)
+            scrollObserver.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Observar elementos para animação
-document.querySelectorAll('.plano-card, .sobre-feature, .contato-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
+// Função para observar elementos com animação
+function observeElements() {
+    // Seção Hero - aparece imediatamente (sem animação de scroll)
+    const heroText = document.querySelector('.hero-text');
+    const heroImage = document.querySelector('.hero-image');
+    
+    if (heroText) {
+        heroText.classList.add('fade-in-left', 'animate');
+    }
+    
+    if (heroImage) {
+        heroImage.classList.add('fade-in-right', 'animate');
+    }
+    
+    // Section Headers
+    document.querySelectorAll('.section-header').forEach((el, index) => {
+        el.classList.add('fade-in-up');
+        if (index > 0) {
+            el.classList.add(`animate-delay-${Math.min(index, 2)}`);
+        }
+        scrollObserver.observe(el);
+    });
+    
+    // Carrossel de Planos - observar o container do carrossel
+    const planosCarousel = document.querySelector('#planosCarousel');
+    if (planosCarousel) {
+        planosCarousel.classList.add('fade-in-up');
+        scrollObserver.observe(planosCarousel);
+    }
+    
+    // Seção Sobre - texto da esquerda, imagem da direita
+    const sobreText = document.querySelector('.sobre-text');
+    const sobreImage = document.querySelector('.sobre-image');
+    
+    if (sobreText) {
+        sobreText.classList.add('fade-in-left');
+        scrollObserver.observe(sobreText);
+    }
+    
+    if (sobreImage) {
+        sobreImage.classList.add('fade-in-right');
+        scrollObserver.observe(sobreImage);
+    }
+    
+    // Features da seção Sobre
+    document.querySelectorAll('.sobre-feature').forEach((el, index) => {
+        el.classList.add('fade-in-up');
+        el.classList.add(`animate-delay-${Math.min(index + 1, 3)}`);
+        scrollObserver.observe(el);
+    });
+    
+    // Seção Contato - informações e formulário
+    const contatoInfo = document.querySelector('.contato-info');
+    const contatoForm = document.querySelector('.contato-form');
+    
+    if (contatoInfo) {
+        contatoInfo.classList.add('fade-in-left');
+        scrollObserver.observe(contatoInfo);
+    }
+    
+    if (contatoForm) {
+        contatoForm.classList.add('fade-in-right');
+        scrollObserver.observe(contatoForm);
+    }
+    
+    // Footer sections
+    document.querySelectorAll('.footer-section').forEach((el, index) => {
+        el.classList.add('fade-in-up');
+        el.classList.add(`animate-delay-${Math.min(index + 1, 4)}`);
+        scrollObserver.observe(el);
+    });
+}
+
+// Inicializar observações quando o DOM estiver pronto
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', observeElements);
+} else {
+    observeElements();
+}

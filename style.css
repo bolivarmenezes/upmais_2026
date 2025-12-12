@@ -39,22 +39,15 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background: var(--color-brand-primary);
+    background: var(--color-brand-primary) !important;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     height: var(--header-height);
 }
 
-.header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.header .navbar {
     height: var(--header-height);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
+    padding: 0;
 }
 
 .logo-img {
@@ -64,21 +57,15 @@ body {
     object-fit: contain;
 }
 
-.nav-list {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-list a {
-    text-decoration: none;
-    color: var(--color-white);
+.header .navbar-nav .nav-link {
+    color: var(--color-white) !important;
     font-weight: 500;
     transition: var(--transition);
+    padding: 0.5rem 1rem !important;
 }
 
-.nav-list a:hover {
-    color: var(--color-brand-accent);
+.header .navbar-nav .nav-link:hover {
+    color: var(--color-brand-accent) !important;
 }
 
 .btn-cta-header {
@@ -96,23 +83,70 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
     background: #ffd54f;
+    color: var(--color-dark);
 }
 
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    background: none;
+.header .navbar-toggler {
     border: none;
-    cursor: pointer;
+    padding: 0.25rem 0.5rem;
 }
 
-.menu-toggle span {
-    width: 25px;
-    height: 3px;
-    background: var(--color-white);
-    border-radius: 2px;
-    transition: var(--transition);
+.header .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.header .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Navbar Mobile - Menu Expandido */
+@media (max-width: 991.98px) {
+    .header .navbar-collapse {
+        background: rgba(13, 53, 179, 0.98);
+        backdrop-filter: blur(10px);
+        margin-top: 1rem;
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 999;
+    }
+
+    .header .navbar-nav {
+        align-items: flex-start !important;
+        text-align: left;
+    }
+
+    .header .navbar-nav .nav-item {
+        width: 100%;
+    }
+
+    .header .navbar-nav .nav-link {
+        text-align: left !important;
+        padding: 0.75rem 1rem !important;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header .navbar-nav .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+
+    .header .navbar-nav .nav-item:last-child {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header .navbar-nav .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding-left: 1.5rem !important;
+    }
 }
 
 /* Hero Section */
@@ -126,12 +160,7 @@ body {
     align-items: center;
 }
 
-.hero-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-}
+/* Hero content agora usa Bootstrap grid */
 
 .hero-title {
     font-size: 3.5rem;
@@ -209,6 +238,10 @@ body {
 
 .feature-icon {
     font-size: 1.5rem;
+    color: var(--color-brand-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-image {
@@ -286,21 +319,94 @@ section {
     background: var(--color-light);
 }
 
-.planos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+/* Carrossel de Planos */
+#planosCarousel {
+    padding: 2rem 0;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    touch-action: pan-y pinch-zoom;
+    cursor: grab;
+    user-select: none;
+}
+
+#planosCarousel:active {
+    cursor: grabbing;
+}
+
+#planosCarousel .carousel-inner {
+    padding: 1rem 0;
+    width: 100%;
+}
+
+/* Garantir que sempre mostre 3 planos no desktop */
+@media (min-width: 768px) {
+    #planosCarousel .carousel-item .row {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    #planosCarousel .carousel-item .col-md-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
+#planosCarousel .carousel-item {
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+}
+
+#planosCarousel .carousel-item.active {
+    display: block;
+}
+
+/* Indicadores do Carrossel */
+#planosCarousel .carousel-indicators {
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 15;
+}
+
+#planosCarousel .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(13, 53, 179, 0.3);
+    border: 2px solid var(--color-brand-primary);
+    margin: 0 5px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+#planosCarousel .carousel-indicators button.active {
+    background-color: var(--color-brand-primary);
+    transform: scale(1.2);
+}
+
+#planosCarousel .carousel-indicators button:hover {
+    background-color: var(--color-brand-accent);
+    border-color: var(--color-brand-accent);
+    transform: scale(1.1);
 }
 
 .plano-card {
     background: var(--color-white);
     border-radius: var(--border-radius);
-    padding: 2.5rem;
+    border: none;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
     position: relative;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.plano-card .card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .plano-card:hover {
@@ -309,8 +415,13 @@ section {
 }
 
 .plano-card.featured {
-    border: 3px solid var(--color-brand-accent);
-    transform: scale(1.05);
+    border: 3px solid var(--color-brand-accent) !important;
+}
+
+@media (min-width: 768px) {
+    .plano-card.featured {
+        transform: scale(1.05);
+    }
 }
 
 .plano-badge {
@@ -351,6 +462,10 @@ section {
     list-style: none;
     margin-bottom: 2rem;
     flex-grow: 1;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .plano-features li {
@@ -362,20 +477,14 @@ section {
     border-bottom: none;
 }
 
-.plano-features li::before {
-    content: "✓ ";
-    color: var(--color-brand-accent);
-    font-weight: 700;
-    margin-right: 0.5rem;
+/* Check icons agora são Bootstrap Icons, não precisa do ::before */
+.plano-features li {
+    display: flex;
+    align-items: center;
 }
 
 /* Sobre Section */
-.sobre-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-}
+/* Sobre content agora usa Bootstrap grid */
 
 .sobre-text p {
     font-size: 1.125rem;
@@ -394,8 +503,23 @@ section {
 }
 
 .sobre-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-brand-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(13, 53, 179, 0.1) 0%, rgba(13, 53, 179, 0.05) 100%);
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.sobre-feature:hover .sobre-icon {
+    transform: translateY(-5px) scale(1.1);
+    background: linear-gradient(135deg, rgba(13, 53, 179, 0.15) 0%, rgba(13, 53, 179, 0.1) 100%);
+    box-shadow: 0 8px 20px rgba(13, 53, 179, 0.2);
 }
 
 .sobre-feature h4 {
@@ -441,11 +565,7 @@ section {
     background: var(--color-light);
 }
 
-.contato-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-}
+/* Contato content agora usa Bootstrap grid */
 
 .contato-info {
     display: flex;
@@ -453,15 +573,26 @@ section {
     gap: 2rem;
 }
 
-.contato-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-}
+/* Contato item agora usa Bootstrap flex utilities */
 
 .contato-icon {
     font-size: 2rem;
     flex-shrink: 0;
+    color: var(--color-brand-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(13, 53, 179, 0.1);
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.contato-item:hover .contato-icon {
+    background: var(--color-brand-primary);
+    color: var(--color-white);
+    transform: scale(1.1);
 }
 
 .contato-item h4 {
@@ -479,9 +610,8 @@ section {
     gap: 1.5rem;
 }
 
-.form-group input,
-.form-group textarea {
-    width: 100%;
+/* Form inputs agora usam Bootstrap form-control */
+.contato-form .form-control {
     padding: 16px;
     border: 2px solid #ddd;
     border-radius: var(--border-radius);
@@ -490,10 +620,9 @@ section {
     transition: var(--transition);
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
+.contato-form .form-control:focus {
     border-color: var(--color-brand-primary);
+    box-shadow: 0 0 0 0.2rem rgba(13, 53, 179, 0.25);
 }
 
 /* Footer */
@@ -503,12 +632,7 @@ section {
     padding: 60px 0 20px;
 }
 
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
+/* Footer content agora usa Bootstrap grid */
 
 .footer-section h3,
 .footer-section h4 {
@@ -538,14 +662,25 @@ section {
     gap: 1rem;
 }
 
-.social-links a {
+.social-icon {
     font-size: 1.5rem;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
     transition: var(--transition);
 }
 
-.social-links a:hover {
-    transform: translateY(-3px);
+.social-icon:hover {
+    background: var(--color-brand-accent);
+    color: var(--color-dark);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
 }
 
 .footer-bottom {
@@ -555,43 +690,20 @@ section {
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* Responsive */
+/* Responsive - Bootstrap já cuida da maioria, mas mantemos ajustes customizados */
 @media (max-width: 968px) {
-    .nav {
-        display: none;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-
-    .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
     .hero-title {
         font-size: 2.5rem;
     }
 
     .hero-buttons {
         justify-content: center;
+        flex-wrap: wrap;
     }
 
     .hero-features {
         justify-content: center;
-    }
-
-    .sobre-content {
-        grid-template-columns: 1fr;
-    }
-
-    .sobre-features {
-        grid-template-columns: 1fr;
-    }
-
-    .contato-content {
-        grid-template-columns: 1fr;
+        flex-wrap: wrap;
     }
 }
 
@@ -604,8 +716,9 @@ section {
         font-size: 2rem;
     }
 
-    .planos-grid {
-        grid-template-columns: 1fr;
+    /* Carrossel Mobile */
+    #planosCarousel {
+        padding: 2rem 0;
     }
 
     .plano-card.featured {
@@ -624,4 +737,86 @@ section {
 /* Smooth Scroll */
 html {
     scroll-behavior: smooth;
+}
+
+/* Animações de Scroll */
+@media (prefers-reduced-motion: no-preference) {
+    .fade-in-up {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-in-up.animate {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .fade-in-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-in-left.animate {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .fade-in-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-in-right.animate {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .fade-in {
+        opacity: 0;
+        transition: opacity 0.8s ease-out;
+    }
+
+    .fade-in.animate {
+        opacity: 1;
+    }
+}
+
+/* Para usuários que preferem movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+    .fade-in-up,
+    .fade-in-left,
+    .fade-in-right,
+    .fade-in {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* Delays escalonados para animações sequenciais */
+.animate-delay-1 {
+    transition-delay: 0.1s;
+}
+
+.animate-delay-2 {
+    transition-delay: 0.2s;
+}
+
+.animate-delay-3 {
+    transition-delay: 0.3s;
+}
+
+.animate-delay-4 {
+    transition-delay: 0.4s;
+}
+
+.animate-delay-5 {
+    transition-delay: 0.5s;
+}
+
+.animate-delay-6 {
+    transition-delay: 0.6s;
 }
