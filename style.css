@@ -705,9 +705,30 @@ section {
 }
 
 @media (max-width: 991.98px) {
+    .trabalho-remoto {
+        padding: 50px 0;
+    }
+    
+    .trabalho-remoto .row {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .trabalho-remoto .col-lg-6:first-child {
+        order: 1;
+    }
+    
+    .trabalho-remoto .col-lg-6:last-child {
+        order: 2;
+    }
+    
     .trabalho-remoto-image {
-        height: 400px;
-        margin-bottom: 3rem;
+        height: 350px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .trabalho-remoto-content {
+        padding: 1rem 0;
     }
 }
 
@@ -903,9 +924,30 @@ section {
 }
 
 @media (max-width: 991.98px) {
+    .streaming {
+        padding: 50px 0;
+    }
+    
+    .streaming .row {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .streaming .col-lg-6:first-child {
+        order: 2;
+    }
+    
+    .streaming .col-lg-6:last-child {
+        order: 1;
+    }
+    
     .streaming-image {
-        height: 400px;
-        margin-bottom: 3rem;
+        height: 350px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .streaming-content {
+        padding: 1rem 0;
     }
 }
 
@@ -1099,13 +1141,31 @@ section {
 }
 
 @media (max-width: 991.98px) {
-    .jogos-image {
-        height: 400px;
-        margin-bottom: 3rem;
-    }
-
     .jogos {
+        padding: 50px 0;
         background: linear-gradient(180deg, #0B1120 0%, #0d34ae 50%, #0B1120 100%);
+    }
+    
+    .jogos .row {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .jogos .col-lg-6:first-child {
+        order: 2;
+    }
+    
+    .jogos .col-lg-6:last-child {
+        order: 1;
+    }
+    
+    .jogos-image {
+        height: 350px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .jogos-content {
+        padding: 1rem 0;
     }
 }
 
@@ -1240,9 +1300,30 @@ section {
 }
 
 @media (max-width: 991.98px) {
+    .empresas {
+        padding: 50px 0;
+    }
+    
+    .empresas .row {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .empresas .col-lg-6:first-child {
+        order: 1;
+    }
+    
+    .empresas .col-lg-6:last-child {
+        order: 2;
+    }
+    
     .empresas-image {
-        height: 400px;
-        margin-bottom: 3rem;
+        height: 350px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .empresas-content {
+        padding: 1rem 0;
     }
 }
 
