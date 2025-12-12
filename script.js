@@ -83,12 +83,12 @@ function observeElements() {
         scrollObserver.observe(el);
     });
     
-    // Carrossel de Planos - observar o container do carrossel
-    const planosCarousel = document.querySelector('#planosCarousel');
-    if (planosCarousel) {
-        planosCarousel.classList.add('fade-in-up');
-        scrollObserver.observe(planosCarousel);
-    }
+    // Cards de Planos - aplicar animações
+    document.querySelectorAll('.plano-card').forEach((el, index) => {
+        el.classList.add('fade-in-up');
+        el.classList.add(`animate-delay-${Math.min(index + 1, 5)}`);
+        scrollObserver.observe(el);
+    });
     
     // Seção Sobre - texto da esquerda, imagem da direita
     const sobreText = document.querySelector('.sobre-text');
@@ -108,6 +108,90 @@ function observeElements() {
     document.querySelectorAll('.sobre-feature').forEach((el, index) => {
         el.classList.add('fade-in-up');
         el.classList.add(`animate-delay-${Math.min(index + 1, 3)}`);
+        scrollObserver.observe(el);
+    });
+    
+    // Seção Trabalho Remoto - imagem e conteúdo
+    const trabalhoRemotoImage = document.querySelector('.trabalho-remoto-image');
+    const trabalhoRemotoContent = document.querySelector('.trabalho-remoto-content');
+    
+    if (trabalhoRemotoImage) {
+        trabalhoRemotoImage.classList.add('fade-in-left');
+        scrollObserver.observe(trabalhoRemotoImage);
+    }
+    
+    if (trabalhoRemotoContent) {
+        trabalhoRemotoContent.classList.add('fade-in-right');
+        scrollObserver.observe(trabalhoRemotoContent);
+    }
+    
+    // Features da seção Trabalho Remoto
+    document.querySelectorAll('.trabalho-remoto-feature-item').forEach((el, index) => {
+        el.classList.add('fade-in-up');
+        el.classList.add(`animate-delay-${Math.min(index + 1, 4)}`);
+        scrollObserver.observe(el);
+    });
+    
+    // Seção Streaming - imagem e conteúdo
+    const streamingImage = document.querySelector('.streaming-image');
+    const streamingContent = document.querySelector('.streaming-content');
+    
+    if (streamingImage) {
+        streamingImage.classList.add('fade-in-right');
+        scrollObserver.observe(streamingImage);
+    }
+    
+    if (streamingContent) {
+        streamingContent.classList.add('fade-in-left');
+        scrollObserver.observe(streamingContent);
+    }
+    
+    // Features da seção Streaming
+    document.querySelectorAll('.streaming-feature-item').forEach((el, index) => {
+        el.classList.add('fade-in-up');
+        el.classList.add(`animate-delay-${Math.min(index + 1, 4)}`);
+        scrollObserver.observe(el);
+    });
+    
+    // Seção Jogos - imagem e conteúdo
+    const jogosImage = document.querySelector('.jogos-image');
+    const jogosContent = document.querySelector('.jogos-content');
+    
+    if (jogosImage) {
+        jogosImage.classList.add('fade-in-right');
+        scrollObserver.observe(jogosImage);
+    }
+    
+    if (jogosContent) {
+        jogosContent.classList.add('fade-in-left');
+        scrollObserver.observe(jogosContent);
+    }
+    
+    // Features da seção Jogos
+    document.querySelectorAll('.jogos-feature-item').forEach((el, index) => {
+        el.classList.add('fade-in-up');
+        el.classList.add(`animate-delay-${Math.min(index + 1, 4)}`);
+        scrollObserver.observe(el);
+    });
+    
+    // Seção Empresas - imagem e conteúdo
+    const empresasImage = document.querySelector('.empresas-image');
+    const empresasContent = document.querySelector('.empresas-content');
+    
+    if (empresasImage) {
+        empresasImage.classList.add('fade-in-left');
+        scrollObserver.observe(empresasImage);
+    }
+    
+    if (empresasContent) {
+        empresasContent.classList.add('fade-in-right');
+        scrollObserver.observe(empresasContent);
+    }
+    
+    // Features da seção Empresas
+    document.querySelectorAll('.empresas-feature-item').forEach((el, index) => {
+        el.classList.add('fade-in-up');
+        el.classList.add(`animate-delay-${Math.min(index + 1, 4)}`);
         scrollObserver.observe(el);
     });
     
@@ -135,7 +219,9 @@ function observeElements() {
 
 // Inicializar observações quando o DOM estiver pronto
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', observeElements);
+    document.addEventListener('DOMContentLoaded', () => {
+        observeElements();
+    });
 } else {
     observeElements();
 }
