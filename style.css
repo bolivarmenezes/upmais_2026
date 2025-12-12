@@ -340,17 +340,16 @@ section {
     width: 100%;
 }
 
-/* Garantir que sempre mostre 3 planos no desktop */
-@media (min-width: 768px) {
-    #planosCarousel .carousel-item .row {
-        display: flex;
-        flex-wrap: nowrap;
-    }
+/* Garantir alinhamento consistente dos planos em todos os slides */
+#planosCarousel .carousel-item .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
 
-    #planosCarousel .carousel-item .col-md-4 {
-        flex: 0 0 33.333333%;
-        max-width: 33.333333%;
-    }
+#planosCarousel .carousel-item .col-md-4 {
+    width: 100%;
+    max-width: 100%;
 }
 
 #planosCarousel .carousel-item {
